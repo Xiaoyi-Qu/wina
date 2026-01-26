@@ -1,6 +1,11 @@
 # WINA: Weight Informed Neuron Activation for Accelerating Large Language Model Inference
 
-\[[paper](https://arxiv.org/abs/2505.19427)\]
+
+## 🎉 Paper Accepted @ ICLR 2026
+
+Our paper **WINA** has been accepted to **ICLR 2026**!
+
+📄 Paper: https://openreview.net/pdf?id=l7Vb3yxmuz
 
 <div  align="center">    
 <img src="figures/overview.png"  width="360" height="200" />
