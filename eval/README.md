@@ -6,7 +6,7 @@ We evaluate the sparsified model on `AIME24` and `AIME25` math reasoning tasks.
 bash run_aime.sh # Need to specify the number of GPUs in the generate_aime.sh folder
 ```
 
-The results are saved into `outputs` folder. The evaluation metrics includes @Avg32 accuracy, tokenwise entropy, mean entropy, and 
+The results are saved into `outputs` folder. The evaluation metrics includes @Avg32 accuracy, tokenwise entropy, mean entropy, and generated token length. 
 
 ## Empirical Analysis PartI
 We first visualize how the sparsity level affects the distribution of tokenwise entropy. One can run the following command to obtain the results.
