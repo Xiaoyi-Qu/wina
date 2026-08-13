@@ -29,11 +29,11 @@ from utils.utils import get_sparse_model, get_tokenizer
 
 # ── CONFIG ────────────────────────────────────────────────────────────
 MODEL_PATH     = "Qwen/Qwen2.5-Math-7B-Instruct"
-AIME_PATH      = "/teamspace/studios/this_studio/wina/eval/data/aime25.jsonl"
+AIME_PATH      = "/teamspace/studios/this_studio/wina/eval/data/aime24.jsonl"
 OUT            = "/teamspace/studios/this_studio/wina/allocation_results"
-MAX_NEW_TOKENS = 16384
+MAX_NEW_TOKENS = 1024
 N_PROBLEMS     = 30
-CHUNK_SIZE     = 8       # B=32 tokens per chunk (paper Eq.3 / Fig.2)
+CHUNK_SIZE     = 64       # B=32 tokens per chunk (paper Eq.3 / Fig.2)
 TOP_K_NEURONS  = 500      # k=500 for threshold (paper Appendix B)
 TOP_K_PER_LAYER = 32      # 64 per layer in Eq.5
 SAVE_DIR       = "neuron_count_entropy"
