@@ -26,11 +26,11 @@ bash visualization.sh
 
 Results are saved to the `visualization/` folder. Tokens are color-coded by entropy level (low / high).
 
-<!-- ## Empirical Analysis PartII
+## Empirical Analysis PartII (Under edit)
 We further conduct analysis on how the activation values affects the entropy values. Please run the following command.
 
 ```bash
 python entropy_vs_activation.py
 ```
 
-The results are saved into `???` folder.  -->
+The results are saved into `???` folder. 
