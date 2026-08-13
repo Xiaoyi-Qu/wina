@@ -1,21 +1,30 @@
-Under this folder, we will evaluate the performance of sparse model on mathematical reasoning tasks. In addition, we conduct empirical analysis to understand how the model's sparsity level/activation values is correlated to tokenwise entropy. 
+# Sparse Model Evaluation on Mathematical Reasoning
+
+This folder contains experiments evaluating sparse models on mathematical reasoning tasks. We also conduct empirical analysis to understand how sparsity level and activation values correlate with token-wise entropy.
 
 ## Evaluation
-We evaluate the sparsified model on `AIME24` and `AIME25` math reasoning tasks.
-```bash
-bash run_aime.sh # Need to specify the number of GPUs in the generate_aime.sh folder
-```
 
-The results are saved into `outputs` folder. The evaluation metrics includes @Avg32 accuracy, tokenwise entropy, mean entropy, and generated token length. 
-
-## Empirical Analysis PartI
-We first visualize how the sparsity level affects the distribution of tokenwise entropy. One can run the following command to obtain the results.
+We evaluate the sparsified model on the `AIME24` and `AIME25` math reasoning benchmarks.
 
 ```bash
-bash visualization.sh 
+bash run_aime.sh  # Specify the number of GPUs in generate_aime.sh
 ```
 
-The results are saved into `visualization` folder. The text is labeled using different color to distinguish between different entropy level. 
+Results are saved to the `outputs/` folder. Evaluation metrics include:
+- **Avg@32 accuracy**
+- **Token-wise entropy**
+- **Mean entropy**
+- **Generated token length**
+
+## Empirical Analysis Part I
+
+We visualize how sparsity level affects the distribution of token-wise entropy. Run the following command to generate the results:
+
+```bash
+bash visualization.sh
+```
+
+Results are saved to the `visualization/` folder. Tokens are color-coded by entropy level (low / high).
 
 <!-- ## Empirical Analysis PartII
 We further conduct analysis on how the activation values affects the entropy values. Please run the following command.
