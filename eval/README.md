@@ -12,16 +12,16 @@ The results are saved into `outputs` folder. The evaluation metrics includes @Av
 We first visualize how the sparsity level affects the distribution of tokenwise entropy. One can run the following command to obtain the results.
 
 ```bash
-python visualization.py data1.jsonl data2.jsonl
+bash visualization.sh 
 ```
 
-The results are saved into `visualization` folder. 
+The results are saved into `visualization` folder. The text is labeled using different color to distinguish between different entropy level. 
 
-## Empirical Analysis PartII
+<!-- ## Empirical Analysis PartII
 We further conduct analysis on how the activation values affects the entropy values. Please run the following command.
 
 ```bash
 python entropy_vs_activation.py
 ```
 
-The results are saved into `???` folder. 
+The results are saved into `???` folder.  -->
