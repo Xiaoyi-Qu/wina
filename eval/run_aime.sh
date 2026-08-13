@@ -9,8 +9,8 @@ OUTPUT_FOLDER_NAME=$"outputs"
 BACKEND=$"hf"
 
 if [ "$MODEL_NAME" == "Qwen/Qwen2.5-Math-7B-Instruct" ]; then
-    # seed_list_aime24=(121) # 141 151 161 171 181 191)
-    seed_list_aime25=(111) # 222 333 444 555 666 777 888
+    seed_list_aime24=(121 131 141 151 161 171 181 191)
+    seed_list_aime25=(111 222 333 444 555 666 777 888)
     # seed_list_amc23=(101)  # 201 301 401 501 601 701 801
     # seed_math500=(151)
     # seed_minervamath=(131)
@@ -50,17 +50,17 @@ fi
 
 
 # AIME 24
-# for seed in ${seed_list_aime24[@]}; do
-#     bash generate_aime.sh ${MODEL_NAME} ${seed} aime24 "${OUTPUT_FOLDER_NAME}/aime24" ${MODEL_TYPE}
-# done
-# python evaluate_aime.py --modelfolder "${OUTPUT_FOLDER_NAME}/aime24" --test_data data/aime24.jsonl
+for seed in ${seed_list_aime24[@]}; do
+    bash generate_aime.sh ${MODEL_NAME} ${seed} aime24 "${OUTPUT_FOLDER_NAME}/aime24" ${MODEL_TYPE}
+done
+python evaluate_aime.py --modelfolder "${OUTPUT_FOLDER_NAME}/aime24" --test_data data/aime24.jsonl
 
 
 # AIME 25
 for seed in ${seed_list_aime25[@]}; do
     bash generate_aime.sh ${MODEL_NAME} ${seed} aime25 "${OUTPUT_FOLDER_NAME}/aime25" ${MODEL_TYPE}
 done
-# python evaluate_aime.py --modelfolder "${OUTPUT_FOLDER_NAME}/aime25" --test_data data/aime25.jsonl
+python evaluate_aime.py --modelfolder "${OUTPUT_FOLDER_NAME}/aime25" --test_data data/aime25.jsonl
 
 
 # # AMC 23

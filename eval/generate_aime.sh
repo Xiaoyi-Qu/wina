@@ -13,7 +13,7 @@ DATA="data/${DATA_NAME}.jsonl"
 #######################################
 BSZ=30
 TOTAL=30
-GPUS=1
+GPUS=4
 OUT_SEQ_LEN=8192
 top_p=0.95
 temperature=0.6
