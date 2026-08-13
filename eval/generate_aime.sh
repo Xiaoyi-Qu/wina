@@ -19,23 +19,30 @@ top_p=0.95
 temperature=0.6
 #######################################
 
-for (( gpu=0; gpu<GPUS; gpu++ )); do
-  python inference.py \
-    --load "${CHECKPOINT_DIR}" \
-    --tokenizer-model "${TOKENIZER_DIR}" \
-    --max-output-len "${OUT_SEQ_LEN}" \
-    --batch-size "${BSZ}" \
-    --temperature "${temperature}" \
-    --topp "${top_p}" \
-    --tensor-parallel-size 1 \
-    --seed "${seed}" \
-    --bf16 \
-    --model-type "${MODEL_TYPE}" \
-    --output-folder "${OUTPUT_FOLDER_NAME}" \
-    --datapath "${DATA}" \
-    --device-id "${gpu}" &
+SPARSITY_LEVELS=(0.0 0.1 0.2 0.3 0.5 0.7 0.9)
 
-  seed=$(( seed + 1 ))
+for sparsity in "${SPARSITY_LEVELS[@]}"; do
+  local_seed=$seed
+  for (( gpu=0; gpu<GPUS; gpu++ )); do
+    python inference.py \
+      --load "${CHECKPOINT_DIR}" \
+      --tokenizer-model "${TOKENIZER_DIR}" \
+      --max-output-len "${OUT_SEQ_LEN}" \
+      --batch-size "${BSZ}" \
+      --temperature "${temperature}" \
+      --topp "${top_p}" \
+      --tensor-parallel-size 1 \
+      --seed "${local_seed}" \
+      --bf16 \
+      --model-type "${MODEL_TYPE}" \
+      --output-folder "${OUTPUT_FOLDER_NAME}_sparsity_${sparsity}" \
+      --datapath "${DATA}" \
+      --sparsity "${sparsity}" \
+      --device-id "${gpu}" &
+
+    local_seed=$(( local_seed + 1 ))
+  done
+  wait
 done
 
 wait

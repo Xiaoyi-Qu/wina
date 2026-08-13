@@ -9,8 +9,8 @@ OUTPUT_FOLDER_NAME=$"outputs"
 BACKEND=$"hf"
 
 if [ "$MODEL_NAME" == "Qwen/Qwen2.5-Math-7B-Instruct" ]; then
-    seed_list_aime24=(121 131 141 151 161 171 181 191)
-    seed_list_aime25=(111 222 333 444 555 666 777 888)
+    seed_list_aime24=(121) # 131 141 151 161 171 181 191)
+    seed_list_aime25=(111) # 222 333 444 555 666 777 888)
     # seed_list_amc23=(101)  # 201 301 401 501 601 701 801
     # seed_math500=(151)
     # seed_minervamath=(131)
@@ -48,20 +48,27 @@ elif [ "$MODEL_NAME" == "nvidia/AceReason-Nemotron-1.1-7B" ]; then
     MODEL_TYPE="qwen"
 fi
 
+SPARSITY_LEVELS=(0.0 0.1 0.2 0.3 0.5 0.7 0.9)
 
 # AIME 24
 for seed in ${seed_list_aime24[@]}; do
     bash generate_aime.sh ${MODEL_NAME} ${seed} aime24 "${OUTPUT_FOLDER_NAME}/aime24" ${MODEL_TYPE}
 done
-python evaluate_aime.py --modelfolder "${OUTPUT_FOLDER_NAME}/aime24" --test_data data/aime24.jsonl
-
+for sparsity in "${SPARSITY_LEVELS[@]}"; do
+  python evaluate_aime.py \
+    --modelfolder "${OUTPUT_FOLDER_NAME}/aime24_sparsity_${sparsity}" \
+    --test_data data/aime24.jsonl
+done
 
 # AIME 25
 for seed in ${seed_list_aime25[@]}; do
     bash generate_aime.sh ${MODEL_NAME} ${seed} aime25 "${OUTPUT_FOLDER_NAME}/aime25" ${MODEL_TYPE}
 done
-python evaluate_aime.py --modelfolder "${OUTPUT_FOLDER_NAME}/aime25" --test_data data/aime25.jsonl
-
+for sparsity in "${SPARSITY_LEVELS[@]}"; do
+  python evaluate_aime.py \
+    --modelfolder "${OUTPUT_FOLDER_NAME}/aime25_sparsity_${sparsity}" \
+    --test_data data/aime25.jsonl
+done
 
 # # AMC 23
 # for seed in ${seed_list_amc23[@]}; do
