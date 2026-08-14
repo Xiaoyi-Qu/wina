@@ -467,7 +467,7 @@ def build_html(records: list[dict], cmap: str, use_log: bool,
         html_parts.append('</div>')  # record
 
     html_parts.append('</body></html>')
-    return "\n".join(html_parts)
+    return "\n".join(html_parts) # type: ignore
 
 
 # ── main ─────────────────────────────────────────────────────────────────────

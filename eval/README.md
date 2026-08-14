@@ -61,12 +61,12 @@ visualization/
 └── aime25_sparsity_0.0/
 ```
 
-## Step 4: Empirical Analysis II — Activation vs. Entropy
+## Step 4: Empirical Analysis II — Activation vs Entropy
 
-Analyze the correlation between activation values and entropy values.
+Analyze the correlation between activation values and entropy values. We select `mistralai/Ministral-3-3B-Reasoning-2512` model for this empirical analysis. 
 
 ```bash
 python entropy_vs_activation.py
 ```
 
-Results are saved to the `neuron_count_entropy/` folder.
+Results are saved to the `activation_entropy/` folder.
