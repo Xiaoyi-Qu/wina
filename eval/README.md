@@ -49,7 +49,17 @@ Visualize how sparsity level affects the distribution of token-wise entropy. Tok
 bash visualization.sh
 ```
 
-Results are saved to the `visualization/` folder.
+Results are saved to the `visualization/` folder with the following structure:
+
+```
+visualization/
+├── aime24_sparsity_0.0/
+│   ├── seed121.jsonl/
+│   └── seed122.jsonl/
+│       ├── output_0.html
+│       └── output_1.html
+└── aime25_sparsity_0.0/
+```
 
 ## Step 4: Empirical Analysis II — Activation vs. Entropy
 
