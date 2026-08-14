@@ -88,6 +88,8 @@ def preprocess_livecodebench(data_file, model_type):
     instruction = ""
     if model_type == "qwen":
         instruction = "<|im_start|>system\nYou are a helpful and harmless assistant. You should think step-by-step.<|im_end|>\n"
+    elif model_type == "mistral":
+        instruction = "You are a helpful and harmless assistant. You should think step-by-step.\n"
 
     prompt_list = []
     qid_list = []
@@ -105,6 +107,8 @@ def preprocess_livecodebench(data_file, model_type):
 
         if model_type == "qwen":
             final_prompt = instruction + "<|im_start|>user\n" + question + "<|im_end|>\n<|im_start|>assistant\n<think>\n"
+        elif model_type == "mistral":
+            final_prompt = "[INST] " + instruction + question + " [/INST]<think>\n"
         else:
             final_prompt = "<｜User｜>" + question + "<｜Assistant｜><think>\n"
 
@@ -123,6 +127,8 @@ def preprocess_aime(data_file, model_type):
             final_question = item['problem'].strip()
             if model_type == "qwen":
                 final_prompt = """<|im_start|>system\nYou are a helpful and harmless assistant. You should think step-by-step.<|im_end|>\n<|im_start|>user\n{question}\n\nPlease place your final answer inside \\boxed{{}}.<|im_end|>\n<|im_start|>assistant\n<think>\n""".format(question=final_question)
+            elif model_type == "mistral":
+                final_prompt = """[INST] You are a helpful and harmless assistant. You should think step-by-step.\n{question}\n\nPlease place your final answer inside \\boxed{{}}. [/INST]<think>\n""".format(question=final_question)
             else:
                 final_prompt = """<｜begin▁of▁sentence｜><｜User｜>{question}\nPlease reason step by step, and put your final answer within \\boxed{{}}.<｜Assistant｜><think>\n""".format(question=final_question)
             prompt_list.append(final_prompt)
