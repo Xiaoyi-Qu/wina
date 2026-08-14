@@ -1,50 +1,62 @@
-The first step is to obtain the sparsity for each weight matrices. Please follow instructions provided in the `README.md` file under `wina` folder.
+# Sparsity Analysis for Reasoning Models
 
-Our new candidate models include:
+## Step 1: Obtain Sparsity
+
+Compute the sparsity for each weight matrix by following the instructions in the `README.md` file under the `wina/` folder.
+
+### Candidate Models
+
 - `Qwen/Qwen3-VL-4B-Thinking`
 - `mistralai/Ministral-3-3B-Reasoning-2512`
 - `Qwen/Qwen3-VL-8B-Thinking`
 - `mistralai/Ministral-3-8B-Reasoning-2512`
 
-The current `wina` project is based on the package `transformers 4.44.1`. One needs to edit the code such that new candidate models (based on new version of transformers) are supported.
+> **Note:** The current `wina` project is based on `transformers==4.44.1`. The code must be updated to support the new candidate models, which require a newer version of `transformers`.
 
-## Evaluation
+## Step 2: Evaluation
 
-The next step is to evaluate the performance of sparsified model on math reasoning tasks. We select `AIME24` and `AIME25` as our math reasoning benchmarks. Note that the current bash script targets for `Qwen/Qwen2.5-Math-7B-Instruct` model. Please add bash scripts of same format for the four candidate models. After adding bash scripts for new models, run the following command to obtain the evaluation results.
+Evaluate the performance of sparsified models on math reasoning tasks. We use **AIME24** and **AIME25** as benchmarks.
+
+The existing bash script targets `Qwen/Qwen2.5-Math-7B-Instruct`. Add bash scripts in the same format for the four candidate models listed above, then run:
 
 ```bash
 bash run_aime.sh
 ```
 
-Results are saved to the `outputs/` folder. Evaluation metrics include:
+Results are saved to the `outputs/` folder with the following structure:
+
+```
+outputs/
+├── aime24_sparsity_0.0/
+│   ├── accuracy_results.json
+│   ├── seed121.jsonl
+│   └── seed122.jsonl
+└── aime25_sparsity_0.0/
+```
+
+Evaluation metrics include:
+
 - **Avg@32 accuracy**
 - **Token-wise entropy**
 - **Mean entropy**
 - **Generated token length**
 
-The structure of the `outputs/` folder is organized as follows:
-    outputs/
-    ├── aime24_sparsity_0.0/
-    │   ├── accuracy_results.json
-    │   ├── seed121.jsonl
-    │   └── seed122.jsonl
-    └── aime25_sparsity_0.0/
+## Step 3: Empirical Analysis I — Entropy Distribution
 
-## Empirical Analysis Part I
-
-In the first empirical analysis, we visualize how sparsity level affects the distribution of token-wise entropy. Run the following command to generate the results.
+Visualize how sparsity level affects the distribution of token-wise entropy. Tokens are color-coded by entropy level (low/high).
 
 ```bash
 bash visualization.sh
 ```
 
-Results are saved in the `visualization/` folder. Tokens are color-coded by entropy level (low / high).
+Results are saved to the `visualization/` folder.
 
-## Empirical Analysis Part II
-In the second empirical analysis, we conduct analysis on how the activation values are correlated with the entropy values. Please run the following command.
+## Step 4: Empirical Analysis II — Activation vs. Entropy
+
+Analyze the correlation between activation values and entropy values.
 
 ```bash
 python entropy_vs_activation.py
 ```
 
-The results are saved into under `neuron_count_entropy` folder. 
+Results are saved to the `neuron_count_entropy/` folder.
