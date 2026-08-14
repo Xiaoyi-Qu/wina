@@ -1,18 +1,16 @@
 The first step is to obtain the sparsity for each weight matrices. Please follow instructions provided in the `README.md` file under `wina` folder.
 
 Our new candidate models include:
-- `Qwen/Qwen3-VL-8B-Thinking`
-- `mistralai/Ministral-3-8B-Reasoning-2512`
 - `Qwen/Qwen3-VL-4B-Thinking`
 - `mistralai/Ministral-3-3B-Reasoning-2512`
+- `Qwen/Qwen3-VL-8B-Thinking`
+- `mistralai/Ministral-3-8B-Reasoning-2512`
 
 The current `wina` project is based on the package `transformers 4.44.1`. One needs to edit the code such that new candidate models (based on new version of transformers) are supported.
 
 ## Evaluation
 
-The next step is to evaluate the performance of sparsified model on math reasoning tasks.
-
-We select `AIME24` and `AIME25` as our math reasoning benchmarks.
+The next step is to evaluate the performance of sparsified model on math reasoning tasks. We select `AIME24` and `AIME25` as our math reasoning benchmarks. Note that the current bash script targets for `Qwen/Qwen2.5-Math-7B-Instruct` model. Please add bash scripts of same format for the four candidate models. After adding bash scripts for new models, run the following command to obtain the evaluation results.
 
 ```bash
 bash run_aime.sh
@@ -31,8 +29,6 @@ The structure of the `outputs/` folder is organized as follows:
     │   ├── seed121.jsonl
     │   └── seed122.jsonl
     └── aime25_sparsity_0.0/
-
-Note that the current bash script targets for `Qwen/Qwen2.5-Math-7B-Instruct` model. Please add bash scripts of same format for the four candidate models.
 
 ## Empirical Analysis Part I
 
