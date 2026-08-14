@@ -1,13 +1,21 @@
-# Sparse Model Evaluation on Mathematical Reasoning
+The first step is to obtain the sparsity for each weight matrices. Please follow instructions provided in the `README.md` file under `wina` folder.
 
-This folder contains experiments evaluating sparse models on mathematical reasoning tasks. We also conduct empirical analysis to understand how sparsity level and activation values correlate with token-wise entropy.
+Our new candidate models include:
+- Qwen/Qwen3-VL-8B-Thinking
+- mistralai/Ministral-3-8B-Reasoning-2512
+- Qwen/Qwen3-VL-4B-Thinking
+- mistralai/Ministral-3-3B-Reasoning-2512
+
+The current `wina` project is based on the package `transformers 4.44.1`. One needs to edit the code such that new candidate models (based on new version of transformers) are supported.
 
 ## Evaluation
 
-We evaluate the sparsified model on the `AIME24` and `AIME25` math reasoning benchmarks.
+The next step is to evaluate the performance of sparsified model on math reasoning tasks.
+
+We select `AIME24` and `AIME25` as our math reasoning benchmarks.
 
 ```bash
-bash run_aime.sh  # Specify the number of GPUs in generate_aime.sh
+bash run_aime.sh
 ```
 
 Results are saved to the `outputs/` folder. Evaluation metrics include:
@@ -16,21 +24,31 @@ Results are saved to the `outputs/` folder. Evaluation metrics include:
 - **Mean entropy**
 - **Generated token length**
 
+The structure of the `outputs/` folder is organized as follows:
+    outputs/
+    ├── aime24_sparsity_0.0/
+    │   ├── accuracy_results.json
+    │   ├── seed121.jsonl
+    │   └── seed122.jsonl
+    └── aime25_sparsity_0.0/
+
+Note that the current bash script targets for `Qwen/Qwen2.5-Math-7B-Instruct` model. Please add bash scripts of same format for the four candidate models.
+
 ## Empirical Analysis Part I
 
-We visualize how sparsity level affects the distribution of token-wise entropy. Run the following command to generate the results:
+In the first empirical analysis, we visualize how sparsity level affects the distribution of token-wise entropy. Run the following command to generate the results.
 
 ```bash
 bash visualization.sh
 ```
 
-Results are saved to the `visualization/` folder. Tokens are color-coded by entropy level (low / high).
+Results are saved in the `visualization/` folder. Tokens are color-coded by entropy level (low / high).
 
-## Empirical Analysis PartII (Under edit)
-We further conduct analysis on how the activation values are correlated with the entropy values. Please run the following command.
+## Empirical Analysis Part II
+In the second empirical analysis, we conduct analysis on how the activation values are correlated with the entropy values. Please run the following command.
 
 ```bash
 python entropy_vs_activation.py
 ```
 
-The results are saved into under `neuron count entropy` folder. 
+The results are saved into under `neuron_count_entropy` folder. 
