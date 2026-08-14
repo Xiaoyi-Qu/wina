@@ -16,36 +16,6 @@ if [ "$MODEL_NAME" == "Qwen/Qwen2.5-Math-7B-Instruct" ]; then
     # seed_minervamath=(131)
     # seed_olympiad=(141)
     MODEL_TYPE="qwen"
-elif [ "$MODEL_NAME" == "ckpt/distilled_student_w4g128" ]; then
-    # seed_list_aime24=(121) # 131 141 151 161 171 181 191)
-    # seed_list_aime25=(111) # 222 333 444 555 666 777 888)
-    # seed_list_amc23=(101) # 201 301 401 501 601 701 801)
-    seed_list_aime24=(121 131 141 151 161 171 181 191 201 211 221 231 241 251 261 271)
-    seed_list_aime25=(111 222 333 444 555 666 777 888 999 1110 1221 1332 1443 1554 1665 1776)
-    seed_list_amc23=(101 201 301 401 501 601 701 801 901 1001 1101 1201 1301 1401 1501 1601)
-    seed_math500=(151)
-    seed_minervamath=(131)
-    seed_olympiad=(141)
-    MODEL_TYPE="qwen"
-elif [ "$MODEL_NAME" == "ckpt/distilled_student_w3g128" ]; then
-    # seed_list_aime24=(121) # 131 141 151 161 171 181 191)
-    # seed_list_aime25=(111) # 222 333 444 555 666 777 888)
-    # seed_list_amc23=(101) # 201 301 401 501 601 701 801)
-    seed_list_aime24=(121 131 141 151 161 171 181 191 201 211 221 231 241 251 261 271)
-    seed_list_aime25=(111 222 333 444 555 666 777 888 999 1110 1221 1332 1443 1554 1665 1776)
-    seed_list_amc23=(101 201 301 401 501 601 701 801 901 1001 1101 1201 1301 1401 1501 1601)
-    seed_math500=(151)
-    seed_minervamath=(131)
-    seed_olympiad=(141)
-    MODEL_TYPE="qwen"
-elif [ "$MODEL_NAME" == "nvidia/AceReason-Nemotron-14B" ]; then
-    seed_list_aime24=(111 222 333 444 555 666 777 888)
-    seed_list_aime25=(111 222 333 444 555 666 777 888)
-    MODEL_TYPE="r1"
-elif [ "$MODEL_NAME" == "nvidia/AceReason-Nemotron-1.1-7B" ]; then
-    seed_list_aime24=(100 200 300 400 500 600 700 800)
-    seed_list_aime25=(100 200 300 400 500 600 700 800)
-    MODEL_TYPE="qwen"
 fi
 
 SPARSITY_LEVELS=(0.0 0.1 0.2 0.3 0.5 0.7 0.9)
