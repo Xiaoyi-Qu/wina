@@ -63,7 +63,7 @@ visualization/
 
 ## Step 4: Empirical Analysis II — Activation vs Entropy
 
-Analyze the correlation between activation values and entropy values. We select `mistralai/Ministral-3-3B-Reasoning-2512` model for this empirical analysis. 
+Analyze the correlation between activation values and entropy values. We are currently using `Qwen/Qwen2.5-Math-7B-Instruct` model for this empirical analysis. 
 
 ```bash
 python entropy_vs_activation.py

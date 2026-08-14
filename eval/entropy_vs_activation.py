@@ -9,9 +9,6 @@ For each B-token chunk during generation, measure:
   - Count of activated neurons (SwiGLU contribution + threshold, Eq.1-2,5-6)
 Then correlate count with entropy across all chunks.
 
-Key fix vs original script:
-  OLD: L2 norm / Std / Kurtosis of raw MLP output vector
-  NEW: Count of activated neurons via |SiLU(gate) * up| > threshold
 """
 
 import os, json, gc
@@ -24,19 +21,20 @@ import matplotlib.pyplot as plt
 from scipy import stats as sp_stats
 
 import sys
-sys.path.insert(0, "/teamspace/studios/this_studio/wina")
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from utils.utils import get_sparse_model, get_tokenizer
 
 # ── CONFIG ────────────────────────────────────────────────────────────
 MODEL_PATH     = "Qwen/Qwen2.5-Math-7B-Instruct"
-AIME_PATH      = "/teamspace/studios/this_studio/wina/eval/data/aime24.jsonl"
-OUT            = "/teamspace/studios/this_studio/wina/allocation_results"
-MAX_NEW_TOKENS = 1024
+AIME_PATH      = "data/aime24.jsonl"
+OUT            = f"{str(Path(__file__).resolve().parent.parent)}/allocation_results"
+MAX_NEW_TOKENS = 8192
 N_PROBLEMS     = 30
 CHUNK_SIZE     = 64       # B=32 tokens per chunk (paper Eq.3 / Fig.2)
 TOP_K_NEURONS  = 500      # k=500 for threshold (paper Appendix B)
 TOP_K_PER_LAYER = 32      # 64 per layer in Eq.5
-SAVE_DIR       = "neuron_count_entropy"
+SAVE_DIR       = "activation_entropy"
 DEVICE         = "auto"
 
 os.makedirs(SAVE_DIR, exist_ok=True)
@@ -256,28 +254,7 @@ fig.tight_layout()
 fig.savefig(os.path.join(SAVE_DIR, "neuron_count_vs_entropy.png"), dpi=150)
 print(f"\n[SAVED] neuron_count_vs_entropy.png")
 
-# 2. Distributions
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-
-ax = axes[0]
-ax.hist(counts, bins=80, color="#4393c3", edgecolor="none", alpha=0.8)
-ax.set_xlabel("Activated Neuron Count")
-ax.set_ylabel("Count")
-ax.set_title("Distribution of Activated Neuron Counts")
-
-ax = axes[1]
-ax.hist(ents, bins=80, color="#b2182b", edgecolor="none", alpha=0.8)
 lo_q, hi_q = np.percentile(ents, [25, 75])
-ax.axvline(lo_q, color="green", ls="--", label=f"P25={lo_q:.2f}")
-ax.axvline(hi_q, color="red",   ls="--", label=f"P75={hi_q:.2f}")
-ax.set_xlabel("Mean Chunk Entropy (bits)")
-ax.set_ylabel("Count")
-ax.set_title("Entropy Distribution")
-ax.legend()
-
-fig.tight_layout()
-fig.savefig(os.path.join(SAVE_DIR, "distributions.png"), dpi=150)
-print(f"[SAVED] distributions.png")
 
 # 3. Per-layer: average neuron count in low-entropy vs high-entropy chunks
 lo_mask = ents <= lo_q
@@ -308,8 +285,8 @@ summary = {
         "high_entropy_mean_count": float(counts[hi_mask].mean()),
     },
 }
-with open(os.path.join(SAVE_DIR, "summary.json"), "w") as f:
-    json.dump(summary, f, indent=2)
-with open(os.path.join(SAVE_DIR, "chunk_records.json"), "w") as f:
-    json.dump(chunk_records, f, indent=2)
+# with open(os.path.join(SAVE_DIR, "summary.json"), "w") as f:
+#     json.dump(summary, f, indent=2)
+# with open(os.path.join(SAVE_DIR, "chunk_records.json"), "w") as f:
+#     json.dump(chunk_records, f, indent=2)
 print(f"[SAVED] summary.json, chunk_records.json\nDone.")
