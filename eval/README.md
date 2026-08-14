@@ -1,10 +1,10 @@
 The first step is to obtain the sparsity for each weight matrices. Please follow instructions provided in the `README.md` file under `wina` folder.
 
 Our new candidate models include:
-- Qwen/Qwen3-VL-8B-Thinking
-- mistralai/Ministral-3-8B-Reasoning-2512
-- Qwen/Qwen3-VL-4B-Thinking
-- mistralai/Ministral-3-3B-Reasoning-2512
+- `Qwen/Qwen3-VL-8B-Thinking`
+- `mistralai/Ministral-3-8B-Reasoning-2512`
+- `Qwen/Qwen3-VL-4B-Thinking`
+- `mistralai/Ministral-3-3B-Reasoning-2512`
 
 The current `wina` project is based on the package `transformers 4.44.1`. One needs to edit the code such that new candidate models (based on new version of transformers) are supported.
 
