@@ -4,17 +4,13 @@
 # - https://huggingface.co/datasets/Hothan/OlympiadBench
 
 # MODEL_NAME=$"nvidia/AceReason-Nemotron-7B"
-MODEL_NAME=$"Qwen/Qwen2.5-Math-7B-Instruct" # $"../train/ckpt/distilled_student_w4g128"
-OUTPUT_FOLDER_NAME=$"outputs"
+MODEL_NAME=$"Qwen/Qwen2.5-Math-7B-Instruct" # Please replace with your own model name
+OUTPUT_FOLDER_NAME=$"outputs_qwen2.5-7B"    # Please replace with your own 
 BACKEND=$"hf"
 
 if [ "$MODEL_NAME" == "Qwen/Qwen2.5-Math-7B-Instruct" ]; then
     seed_list_aime24=(121 131 141 151 161 171 181 191)
     seed_list_aime25=(111 222 333 444 555 666 777 888)
-    # seed_list_amc23=(101)  # 201 301 401 501 601 701 801
-    # seed_math500=(151)
-    # seed_minervamath=(131)
-    # seed_olympiad=(141)
     MODEL_TYPE="qwen"
 fi
 
