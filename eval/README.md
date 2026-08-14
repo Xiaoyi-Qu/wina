@@ -20,7 +20,7 @@ Evaluate the performance of sparsified models on math reasoning tasks. We use **
 The existing bash script targets `Qwen/Qwen2.5-Math-7B-Instruct`. Add bash scripts in the same format for the four candidate models listed above, then run:
 
 ```bash
-bash run_aime.sh
+bash run_aime_qwen2.5-7B.sh
 ```
 
 Results are saved to the `outputs/` folder with the following structure:
